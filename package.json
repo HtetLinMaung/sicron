@@ -7,7 +7,7 @@
     "start": "tsc && starless-server start",
     "watch": "tsc -w",
     "dev": "nodemon node_modules/starless-server start",
-    "build": "tsc && starless-server build --azure-functions --aws-sam-lambda"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
