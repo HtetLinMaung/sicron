@@ -16,6 +16,7 @@ const jobSchema = new Schema(
     jobid: {
       type: String,
       required: true,
+      unique: true,
     },
     jobtype: {
       type: String,
