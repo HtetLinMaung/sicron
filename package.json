@@ -1,0 +1,33 @@
+{
+  "name": "si-cron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && starless-server start",
+    "watch": "tsc -w",
+    "dev": "nodemon node_modules/starless-server start",
+    "build": "tsc && starless-server build --azure-functions --aws-sam-lambda"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@azure/functions": "^3.5.0",
+    "@types/aws-lambda": "^8.10.109",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "@types/node-schedule": "^2.1.0",
+    "@types/uuid": "^9.0.0",
+    "nodemon": "^2.0.20",
+    "starless-server": "^1.11.9",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "code-alchemy": "^1.1.11",
+    "mongoose": "^6.8.2",
+    "node-schedule": "^2.1.0",
+    "starless-http": "^1.0.1",
+    "uuid": "^9.0.0"
+  }
+}

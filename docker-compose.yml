@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  sicron:
+    image: htetlinmaung/sicron
+    build: .
+    ports:
+      - "7072:3000"
+      

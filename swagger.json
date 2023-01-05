@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "OpenAPI 3.0",
+    "description": "",
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "routes",
+      "description": "Everything about your Routes"
+    }
+  ],
+  "paths": {
+    "/cron/api/schedule-job": {
+      "get": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "getcron_api_schedule-job"
+      },
+      "post": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "postcron_api_schedule-job"
+      },
+      "put": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "putcron_api_schedule-job"
+      },
+      "patch": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "patchcron_api_schedule-job"
+      },
+      "delete": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "deletecron_api_schedule-job"
+      }
+    },
+    "/express": {
+      "get": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "getexpress"
+      },
+      "post": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "postexpress"
+      },
+      "put": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "putexpress"
+      },
+      "patch": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "patchexpress"
+      },
+      "delete": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "deleteexpress"
+      }
+    },
+    "/function": {
+      "get": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "getfunction"
+      },
+      "post": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "postfunction"
+      },
+      "put": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "putfunction"
+      },
+      "patch": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "patchfunction"
+      },
+      "delete": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "deletefunction"
+      }
+    },
+    "/lambda": {
+      "get": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "getlambda"
+      },
+      "post": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "postlambda"
+      },
+      "put": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "putlambda"
+      },
+      "patch": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "patchlambda"
+      },
+      "delete": {
+        "tags": [
+          "routes"
+        ],
+        "operationId": "deletelambda"
+      }
+    }
+  }
+}

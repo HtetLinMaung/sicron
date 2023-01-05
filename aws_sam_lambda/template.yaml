@@ -1,0 +1,110 @@
+
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  samlab
+
+  Sample SAM Template for samlab
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 60
+
+Resources:
+  
+  cronapicanceljob:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: cron_api_cancel-job/
+      Handler: index.handler
+      Layers:
+        - !Ref CommonLayer
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Events:
+        cron_api_cancel-job:
+          Type: Api 
+          Properties:
+            Path: /cron/api/cancel-job
+            Method: any
+
+  cronapischedulejob:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: cron_api_schedule-job/
+      Handler: index.handler
+      Layers:
+        - !Ref CommonLayer
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Events:
+        cron_api_schedule-job:
+          Type: Api 
+          Properties:
+            Path: /cron/api/schedule-job
+            Method: any
+
+  express:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: express/
+      Handler: index.handler
+      Layers:
+        - !Ref CommonLayer
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Events:
+        express:
+          Type: Api 
+          Properties:
+            Path: /express
+            Method: any
+
+  function:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: function/
+      Handler: index.handler
+      Layers:
+        - !Ref CommonLayer
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Events:
+        function:
+          Type: Api 
+          Properties:
+            Path: /function
+            Method: any
+
+  lambda:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: lambda/
+      Handler: index.handler
+      Layers:
+        - !Ref CommonLayer
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Events:
+        lambda:
+          Type: Api 
+          Properties:
+            Path: /lambda
+            Method: any
+
+  CommonLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: sam-app-dependencies
+      Description: Dependencies for sam app
+      ContentUri: layers/common/
+      CompatibleRuntimes:
+        - nodejs16.x
+      LicenseInfo: "MIT"
+      RetentionPolicy: Retain
