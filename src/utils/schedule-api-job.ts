@@ -23,11 +23,11 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
         if (jobs[jobid]) {
           log(`Cancel Job ${jobid}`);
           jobs[jobid].cancel();
+          job.status = "finish";
+          await job.save();
         }
         return false;
       }
-      job.status = "start";
-      await job.save();
       const jobHistory = new JobHistory({
         job: job._id,
       });
@@ -68,8 +68,6 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
         }
 
         if (err || response.status >= 400) {
-          job.status = "fail";
-          await job.save();
           jobHistory.log = {};
           if (response) {
             jobHistory.log = {
@@ -90,8 +88,6 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
             responseData: response.data,
             errMessage: null,
           };
-          job.status = "finish";
-          await job.save();
           await Job.findOneAndUpdate(
             { _id: job._id },
             {
@@ -103,13 +99,11 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
         }
         await jobHistory.save();
       } catch (err) {
-        job.status = "fail";
         jobHistory.log = {
           status: null,
           responseData: null,
           errMessage: err.message,
         };
-        await job.save();
         await jobHistory.save();
       }
     }
