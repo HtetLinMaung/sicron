@@ -27,6 +27,7 @@ export const afterWorkerStart = async () => {
         jobtype,
         repeatcount,
         status,
+        finishedcount,
       } of response.data.data) {
         const jobId: string = jobid || v4();
         let job = await Job.findOne({ jobid: jobId });
@@ -39,6 +40,7 @@ export const afterWorkerStart = async () => {
         job.jobtype = jobtype;
         job.repeatcount = repeatcount;
         job.status = status;
+        job.finishedcount = finishedcount || 0;
         await job.save();
         if (status == "active") {
           jobs[jobId] = scheduleApiJob(jobId, rule, options);
