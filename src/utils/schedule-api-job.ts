@@ -14,10 +14,14 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
       await connectMongoose();
       let job = await Job.findOne({ jobid, status: "active" });
       if (!job) {
+        log(`Job ${jobid} not found!`);
         return false;
       }
+      log(`Job ${jobid} found`);
+      console.log(job);
       if (job.repeatcount && job.repeatcount >= job.finishedcount) {
         if (jobs[jobid]) {
+          log(`Cancel Job ${jobid}`);
           jobs[jobid].cancel();
         }
         return false;
