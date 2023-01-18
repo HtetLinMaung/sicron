@@ -19,7 +19,7 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
       }
       log(`Job ${jobid} found`);
       console.log(job);
-      if (job.repeatcount && job.repeatcount >= job.finishedcount) {
+      if (job.repeatcount && job.finishedcount >= job.repeatcount) {
         if (jobs[jobid]) {
           log(`Cancel Job ${jobid}`);
           jobs[jobid].cancel();
