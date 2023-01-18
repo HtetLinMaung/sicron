@@ -4,11 +4,13 @@ import Job from "../models/Job";
 import JobHistory from "../models/JobHistory";
 import { jobs } from "../variables";
 import connectMongoose from "./connect-mongoose";
+import log from "./log";
 
 export default function scheduleApiJob(jobid: string, rule: any, options: any) {
   return scheduleJob(
     typeof rule == "string" ? new Date(rule) : rule,
     async () => {
+      log("Job started");
       await connectMongoose();
       let job = await Job.findOne({ jobid, status: "active" });
       if (!job) {

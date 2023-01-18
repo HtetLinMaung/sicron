@@ -2,6 +2,7 @@ import httpClient from "starless-http";
 import { v4 } from "uuid";
 import Job from "./models/Job";
 import connectMongoose from "./utils/connect-mongoose";
+import log from "./utils/log";
 import scheduleApiJob from "./utils/schedule-api-job";
 import { jobs } from "./variables";
 
@@ -9,6 +10,7 @@ export const afterWorkerStart = async () => {
   console.log("Worker started...");
   await connectMongoose();
   if (process.env.init_jobs_mode == "api" && process.env.init_jobs_url) {
+    log("fetching init data");
     const [response, err] = await httpClient.get(process.env.init_jobs_url);
     if (err || response.status >= 400) {
       if (response) {
@@ -17,6 +19,7 @@ export const afterWorkerStart = async () => {
         console.error(err.message);
       }
     } else {
+      console.log(response.data.data);
       for (const {
         jobid,
         rule,
