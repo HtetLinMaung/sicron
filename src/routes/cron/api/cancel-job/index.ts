@@ -1,5 +1,6 @@
 import { brewBlankExpressFunc } from "code-alchemy";
 import Job from "../../../../models/Job";
+import connectMongoose from "../../../../utils/connect-mongoose";
 import { jobs } from "../../../../variables";
 
 export default brewBlankExpressFunc(async (req, res) => {
@@ -10,6 +11,7 @@ export default brewBlankExpressFunc(async (req, res) => {
       message: "Unauthorized!",
     });
   }
+  await connectMongoose();
   const job = await Job.findOne({
     jobid,
     status: "active",
