@@ -20,6 +20,7 @@ export const afterWorkerStart = async () => {
       }
     } else {
       console.log(response.data.data);
+      await Job.deleteMany({});
       for (const {
         jobid,
         rule,
