@@ -1,4 +1,4 @@
-import { brewBlankExpressFunc } from "code-alchemy";
+import { brewBlankExpressFunc, throwErrorResponse } from "code-alchemy";
 import { jobs } from "../../../../variables";
 import { v4 } from "uuid";
 import connectMongoose from "../../../../utils/connect-mongoose";
@@ -9,10 +9,7 @@ import { log } from "starless-logger";
 export default brewBlankExpressFunc(async (req, res) => {
   const { jobid, repeatcount, rule, jobtype, options, access_key } = req.body;
   if (access_key != process.env.access_key) {
-    return res.status(401).json({
-      code: 401,
-      message: "Unauthorized!",
-    });
+    throwErrorResponse(401, "Unauthorized!");
   }
   await connectMongoose();
 

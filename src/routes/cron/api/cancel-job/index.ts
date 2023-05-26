@@ -1,4 +1,4 @@
-import { brewBlankExpressFunc } from "code-alchemy";
+import { brewBlankExpressFunc, throwErrorResponse } from "code-alchemy";
 import Job from "../../../../models/Job";
 import connectMongoose from "../../../../utils/connect-mongoose";
 import { jobs } from "../../../../variables";
@@ -7,10 +7,7 @@ import { log } from "console";
 export default brewBlankExpressFunc(async (req, res) => {
   const { access_key, jobid } = req.body;
   if (access_key != process.env.access_key) {
-    return res.status(401).json({
-      code: 401,
-      message: "Unauthorized!",
-    });
+    throwErrorResponse(401, "Unauthorized!");
   }
   await connectMongoose();
   const job = await Job.findOne({
@@ -19,10 +16,7 @@ export default brewBlankExpressFunc(async (req, res) => {
   });
   if (!jobs[jobid] || !job) {
     log(`Job ID ${jobid} not found!`);
-    return res.status(404).json({
-      code: 404,
-      message: `Job ID ${jobid} not found!`,
-    });
+    throwErrorResponse(404, `Job ID ${jobid} not found!`);
   }
   jobs[jobid].cancel();
   job.status = "cancel";
