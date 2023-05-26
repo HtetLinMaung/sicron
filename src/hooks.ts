@@ -20,7 +20,11 @@ export const afterWorkerStart = async () => {
       }
     } else {
       console.log(response.data.data);
-      await Job.deleteMany({});
+      // await Job.deleteMany({
+      //   jobid: {
+      //     $in: response.data.data.map((d: any) => d.jobid),
+      //   },
+      // });
       for (const {
         jobid,
         rule,
