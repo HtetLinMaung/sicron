@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import connectMongoose from "../../../../utils/connect-mongoose";
 import Job from "../../../../models/Job";
 import scheduleApiJob from "../../../../utils/schedule-api-job";
-import log from "../../../../utils/log";
+import { log } from "starless-logger";
 
 export default brewBlankExpressFunc(async (req, res) => {
   const { jobid, repeatcount, rule, jobtype, options, access_key } = req.body;
@@ -30,9 +30,9 @@ export default brewBlankExpressFunc(async (req, res) => {
   if (jobtype == "api") {
     log(`schedule job ${jobid}`);
     log("rule: ");
-    console.log(rule);
+    log(rule);
     log("options: ");
-    console.log(options);
+    log(options);
     jobs[jobId] = scheduleApiJob(jobid, rule, options);
   }
 

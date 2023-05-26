@@ -4,15 +4,16 @@ import Job from "./models/Job";
 import connectMongoose from "./utils/connect-mongoose";
 import scheduleApiJob from "./utils/schedule-api-job";
 import { jobs } from "./variables";
+import { log } from "starless-logger";
 
 export const afterWorkerStart = async () => {
-  console.log("Worker started...");
+  log("Worker started...");
   await connectMongoose();
   if (process.env.init_jobs_mode == "api" && process.env.init_jobs_url) {
     const [response, err] = await httpClient.get(process.env.init_jobs_url);
     if (err || response.status >= 400) {
       if (response) {
-        console.log(response.data);
+        log(response.data);
       } else {
         console.error(err.message);
       }

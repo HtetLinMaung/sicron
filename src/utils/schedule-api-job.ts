@@ -4,7 +4,7 @@ import Job from "../models/Job";
 import JobHistory from "../models/JobHistory";
 import { jobs } from "../variables";
 import connectMongoose from "./connect-mongoose";
-import log from "./log";
+import { log } from "starless-logger";
 
 export default function scheduleApiJob(jobid: string, rule: any, options: any) {
   return scheduleJob(
@@ -18,7 +18,7 @@ export default function scheduleApiJob(jobid: string, rule: any, options: any) {
         return false;
       }
       log(`Job ${jobid} found`);
-      console.log(job);
+      log(job);
       if (job.repeatcount && job.finishedcount >= job.repeatcount) {
         if (jobs[jobid]) {
           log(`Cancel Job ${jobid}`);

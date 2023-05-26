@@ -2,24 +2,24 @@ import httpClient from "starless-http";
 import { v4 } from "uuid";
 import Job from "./models/Job";
 import connectMongoose from "./utils/connect-mongoose";
-import log from "./utils/log";
 import scheduleApiJob from "./utils/schedule-api-job";
 import { jobs } from "./variables";
+import { log } from "starless-logger";
 
 export const afterWorkerStart = async () => {
-  console.log("Worker started...");
+  log("Worker started...");
   await connectMongoose();
   if (process.env.init_jobs_mode == "api" && process.env.init_jobs_url) {
     log("fetching init data");
     const [response, err] = await httpClient.get(process.env.init_jobs_url);
     if (err || response.status >= 400) {
       if (response) {
-        console.log(response.data);
+        log(response.data);
       } else {
-        console.error(err.message);
+        log(err.message, "error");
       }
     } else {
-      console.log(response.data.data);
+      log(response.data.data);
       // await Job.deleteMany({
       //   jobid: {
       //     $in: response.data.data.map((d: any) => d.jobid),
